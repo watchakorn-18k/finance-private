@@ -2,15 +2,17 @@
 import { useUserStore } from '@/stores/use-user-store'
 import type { CreateUserBody, UpdateUserBody, User } from '@/models'
 
+const { t } = useI18n()
+
 const userStore = useUserStore()
 const { users, isLoading, error } = storeToRefs(userStore)
 
-const headers = [
-  { title: 'Name', key: 'name' },
-  { title: 'Email', key: 'email' },
-  { title: 'Created At', key: 'createdAt' },
-  { title: 'Action', key: 'action', sortable: false, align: 'end' as const },
-]
+const headers = computed(() => [
+  { title: t('Name'), key: 'name' },
+  { title: t('Email'), key: 'email' },
+  { title: t('Created At'), key: 'createdAt' },
+  { title: t('Actions'), key: 'action', sortable: false, align: 'end' as const },
+])
 
 // Dialog state
 const dialog = ref(false)
@@ -75,13 +77,13 @@ onMounted(() => userStore.fetchUsers())
   <div>
     <VCard>
       <VCardTitle class="d-flex align-center justify-space-between pa-4">
-        <span class="text-h6">Users Management</span>
+        <span class="text-h6">{{ $t('Users Management') }}</span>
         <VBtn
           color="primary"
           prepend-icon="ri-user-add-line"
           @click="openCreate"
         >
-          Add User
+          {{ $t('Add User') }}
         </VBtn>
       </VCardTitle>
 
@@ -107,18 +109,18 @@ onMounted(() => userStore.fetchUsers())
 
         <template #item.action="{ item }">
           <IconBtn @click="openEdit(item)">
-            <VTooltip activator="parent" location="top">Edit</VTooltip>
+            <VTooltip activator="parent" location="top">{{ $t('Edit') }}</VTooltip>
             <VIcon icon="ri-pencil-line" />
           </IconBtn>
           <IconBtn color="error" @click="openDelete(item)">
-            <VTooltip activator="parent" location="top">Delete</VTooltip>
+            <VTooltip activator="parent" location="top">{{ $t('Delete') }}</VTooltip>
             <VIcon icon="ri-delete-bin-line" />
           </IconBtn>
         </template>
 
         <template #no-data>
           <div class="text-center py-8 text-disabled">
-            No users yet. Click "Add User" to create one.
+            {{ $t('No users yet') }}
           </div>
         </template>
       </VDataTable>
@@ -126,19 +128,19 @@ onMounted(() => userStore.fetchUsers())
 
     <!-- Create / Edit Dialog -->
     <VDialog v-model="dialog" max-width="480" persistent>
-      <VCard :title="editingUser ? 'Edit User' : 'Add User'">
+      <VCard :title="editingUser ? $t('Edit User') : $t('Add User')">
         <VCardText>
           <VForm @submit.prevent="submit">
             <VTextField
               v-model="form.name"
-              label="Name"
+              :label="$t('Name')"
               prepend-inner-icon="ri-user-line"
               class="mb-4"
               required
             />
             <VTextField
               v-model="form.email"
-              label="Email"
+              :label="$t('Email')"
               type="email"
               prepend-inner-icon="ri-mail-line"
               required
@@ -146,13 +148,13 @@ onMounted(() => userStore.fetchUsers())
           </VForm>
         </VCardText>
         <VCardActions class="justify-end pa-4">
-          <VBtn variant="text" @click="dialog = false">Cancel</VBtn>
+          <VBtn variant="text" @click="dialog = false">{{ $t('Cancel') }}</VBtn>
           <VBtn
             color="primary"
             :loading="isSubmitting"
             @click="submit"
           >
-            {{ editingUser ? 'Save' : 'Create' }}
+            {{ editingUser ? $t('Save') : $t('Create') }}
           </VBtn>
         </VCardActions>
       </VCard>
@@ -160,18 +162,18 @@ onMounted(() => userStore.fetchUsers())
 
     <!-- Delete Dialog -->
     <VDialog v-model="deleteDialog" max-width="400">
-      <VCard title="Delete User">
+      <VCard :title="$t('Delete User')">
         <VCardText>
-          Are you sure you want to delete <strong>{{ deletingUser?.name }}</strong>? This action cannot be undone.
+          {{ $t('Are you sure you want to delete {name}? This action cannot be undone.', { name: deletingUser?.name }) }}
         </VCardText>
         <VCardActions class="justify-end pa-4">
-          <VBtn variant="text" @click="deleteDialog = false">Cancel</VBtn>
+          <VBtn variant="text" @click="deleteDialog = false">{{ $t('Cancel') }}</VBtn>
           <VBtn
             color="error"
             :loading="isSubmitting"
             @click="confirmDelete"
           >
-            Delete
+            {{ $t('Delete') }}
           </VBtn>
         </VCardActions>
       </VCard>

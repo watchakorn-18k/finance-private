@@ -20,8 +20,8 @@ definePage({
   <div class="misc-wrapper">
     <ErrorHeader
       status-code="404"
-      title="Page Not Found ⚠️"
-      description="We couldn't find the page you are looking for."
+      :title="$t('Page Not Found ⚠️')"
+      :description="$t('We couldn\'t find the page you are looking for.')"
       class="mb-10"
     />
 
@@ -38,7 +38,7 @@ definePage({
         class="mt-10"
         style="z-index: 1;"
       >
-        Back to Home
+        {{ $t('Back to Home') }}
       </VBtn>
 
       <div class="d-md-flex gap-x-2 misc-footer-tree d-none">
