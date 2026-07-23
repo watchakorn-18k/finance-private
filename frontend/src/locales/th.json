@@ -1,0 +1,65 @@
+{
+  "app": {
+    "title": "เงินเงินทองทอง",
+    "dashboard": "แดชบอร์ด",
+    "transactions": "รายการ",
+    "categories": "หมวดหมู่",
+    "users": "ผู้ใช้"
+  },
+  "common": {
+    "loading": "กำลังโหลด...",
+    "error": "เกิดข้อผิดพลาด",
+    "save": "บันทึก",
+    "cancel": "ยกเลิก",
+    "delete": "ลบ",
+    "edit": "แก้ไข",
+    "create": "สร้าง",
+    "search": "ค้นหา",
+    "filter": "กรอง",
+    "noData": "ไม่มีข้อมูล",
+    "confirm": "ยืนยัน",
+    "back": "กลับ",
+    "next": "ถัดไป",
+    "actions": "การดำเนินการ"
+  },
+  "auth": {
+    "login": "เข้าสู่ระบบ",
+    "logout": "ออกจากระบบ",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "register": "สมัครสมาชิก",
+    "forgotPassword": "ลืมรหัสผ่าน"
+  },
+  "transaction": {
+    "title": "รายการ",
+    "amount": "จำนวนเงิน",
+    "type": "ประเภท",
+    "income": "รายรับ",
+    "expense": "รายจ่าย",
+    "date": "วันที่",
+    "description": "คำอธิบาย",
+    "category": "หมวดหมู่",
+    "addTransaction": "เพิ่มรายการ",
+    "editTransaction": "แก้ไขรายการ",
+    "deleteTransaction": "ลบรายการ",
+    "totalIncome": "รายรับทั้งหมด",
+    "totalExpense": "รายจ่ายทั้งหมด",
+    "netBalance": "ยอดคงเหลือ"
+  },
+  "category": {
+    "title": "หมวดหมู่",
+    "name": "ชื่อหมวดหมู่",
+    "type": "ประเภท",
+    "icon": "ไอคอน",
+    "color": "สี",
+    "isDefault": "ค่าเริ่มต้น",
+    "addCategory": "เพิ่มหมวดหมู่",
+    "editCategory": "แก้ไขหมวดหมู่",
+    "deleteCategory": "ลบหมวดหมู่"
+  },
+  "user": {
+    "title": "ผู้ใช้",
+    "name": "ชื่อ",
+    "email": "อีเมล"
+  }
+}
