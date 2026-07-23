@@ -1,11 +1,11 @@
 import { Hono } from 'hono'
-import type { AppEnv } from '../types'
-import { createUserRouter } from './user-router'
+import type { Container } from '../di/container'
+import { userRouter } from './user-router'
+import { categoryRouter } from './category-router'
+import { transactionRouter } from './transaction-router'
 
-export function createApiRouter() {
-  const api = new Hono<AppEnv>()
-
-  api.route('/users', createUserRouter())
-
-  return api
+export function mountRouters(app: Hono<{ Bindings: Env; Variables: { container: Container } }>): void {
+  app.route('/api/v1/users', userRouter)
+  app.route('/api/v1/categories', categoryRouter)
+  app.route('/api/v1/transactions', transactionRouter)
 }

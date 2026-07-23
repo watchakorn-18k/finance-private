@@ -1,17 +1,31 @@
-// AWS Lambda entrypoint (bundled by `npm run build:lambda`).
-// Lambda has no D1/KV bindings, so in-memory repositories are wired in here.
-// Replace with DynamoDB/RDS/ElastiCache implementations for production use.
+import { Hono } from 'hono'
 import { handle } from 'hono/aws-lambda'
-import { createApp } from './app'
+import { cors } from 'hono/cors'
+import { mountRouters } from './routers'
 import { createContainer } from './di/container'
-import { MemoryCacheRepository } from './infrastructure/memory/memory-cache-repository'
 import { MemoryUserRepository } from './infrastructure/memory/memory-user-repository'
+import { MemoryCategoryRepository } from './infrastructure/memory/memory-category-repository'
+import { MemoryTransactionRepository } from './infrastructure/memory/memory-transaction-repository'
+import { MemoryCacheRepository } from './infrastructure/memory/memory-cache-repository'
+import type { CacheRepository } from './domain/repositories/cache-repository'
 
-const container = createContainer({
-  userRepository: new MemoryUserRepository(),
-  cacheRepository: new MemoryCacheRepository(),
+const app = new Hono()
+
+app.use('*', cors())
+
+app.get('/health', (c) => c.json({ status: 'ok' }))
+
+app.use('*', async (c, next) => {
+  const container = createContainer({
+    userRepository: new MemoryUserRepository(),
+    cacheRepository: new MemoryCacheRepository(),
+    categoryRepository: new MemoryCategoryRepository(),
+    transactionRepository: new MemoryTransactionRepository(),
+  })
+  c.set('container', container)
+  await next()
 })
 
-const app = createApp(() => container)
+mountRouters(app)
 
 export const handler = handle(app)

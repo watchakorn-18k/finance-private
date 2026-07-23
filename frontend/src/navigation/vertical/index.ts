@@ -1,18 +1,24 @@
+import type { VerticalNavItems } from '@/@layouts/types'
+
 export default [
   {
-    heading: 'Main',
-  },
-  {
     title: 'Dashboard',
-    to: { name: 'root' },
-    icon: { icon: 'ri-home-line' },
+    to: { name: 'index' },
+    icon: 'ri-dashboard-line',
   },
   {
-    heading: 'Admin',
+    title: 'Transactions',
+    to: { name: 'transactions' },
+    icon: 'ri-exchange-dollar-line',
+  },
+  {
+    title: 'Categories',
+    to: { name: 'categories' },
+    icon: 'ri-list-settings-line',
   },
   {
     title: 'Users',
     to: { name: 'user-page' },
-    icon: { icon: 'ri-user-3-line' },
+    icon: 'ri-user-line',
   },
-]
+] as VerticalNavItems
