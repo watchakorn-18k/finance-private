@@ -43,23 +43,24 @@ function formatAmount(amount: number, type: string) {
 </script>
 
 <template>
-  <VCard>
-    <VCardTitle class="d-flex align-center pa-4">
-      <span class="text-h5">{{ $t('Transactions') }}</span>
+  <VCard elevation="0" border rounded="lg">
+    <div class="d-flex align-center pa-5 gap-4 flex-wrap">
+      <h5 class="text-h5 font-weight-bold mb-0">{{ $t('Transactions') }}</h5>
       <VSpacer />
-      <VTextField v-model="filterMonth" type="month" density="compact" hide-details style="max-width:180px" class="mr-3" />
-      <VSelect v-model="filterType" :items="['', 'income', 'expense']" density="compact" hide-details style="max-width:140px" class="mr-3" />
-      <VBtn color="secondary" variant="tonal" class="mr-3" @click="fetchData">{{ $t('Filter') }}</VBtn>
-      <VBtn color="primary" prepend-icon="ri-add-line">{{ $t('Add Transaction') }}</VBtn>
-    </VCardTitle>
+      <VTextField v-model="filterMonth" type="month" density="compact" hide-details variant="outlined" style="max-width:180px" />
+      <VSelect v-model="filterType" :items="['', 'income', 'expense']" density="compact" hide-details variant="outlined" style="max-width:140px" />
+      <VBtn color="secondary" variant="tonal" @click="fetchData" class="font-weight-medium">{{ $t('Filter') }}</VBtn>
+      <VBtn color="primary" prepend-icon="ri-add-line" rounded="lg" class="font-weight-medium">{{ $t('Add Transaction') }}</VBtn>
+    </div>
+    <VDivider />
     <VDataTable :headers="headers" :items="transactionStore.transactions" :loading="transactionStore.isLoading">
       <template #item.type="{ item }">
-        <VChip :color="item.type === 'income' ? 'success' : 'error'" size="small">
+        <VChip :color="item.type === 'income' ? 'success' : 'error'" size="small" variant="tonal">
           {{ $t(item.type) }}
         </VChip>
       </template>
       <template #item.amount="{ item }">
-        <span :class="`text-${amountColor(item.type)}`">{{ formatAmount(item.amount, item.type) }}</span>
+        <span :class="`font-weight-semibold text-${amountColor(item.type)}`">{{ formatAmount(item.amount, item.type) }}</span>
       </template>
     </VDataTable>
   </VCard>

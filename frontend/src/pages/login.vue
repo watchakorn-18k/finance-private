@@ -35,22 +35,28 @@ async function onClickLogin() {
 </script>
 
 <template>
-  <div class="auth-wrapper d-flex align-center justify-center pa-4">
-    <VCard class="auth-card pa-sm-4 pa-md-7 pa-0" min-width="500">
-      <VCardText>
+  <div class="auth-wrapper d-flex align-center justify-center pa-4 min-vh-100" style="background: linear-gradient(135deg, var(--color-bg) 0%, rgb(var(--v-theme-primary)) 5%, var(--color-bg) 40%, var(--color-bg) 100%);">
+    <VCard
+      class="auth-card"
+      max-width="460"
+      width="100%"
+      elevation="0"
+      border
+      rounded="xl"
+    >
+      <VCardText class="pa-8">
         <div class="d-flex align-center gap-x-3 justify-center mb-6">
           <VNodeRenderer :nodes="themeConfig.app.logo" />
-
-          <h1 class="auth-title">
+          <h1 class="auth-title text-h5 font-weight-bold">
             {{ themeConfig.app.title.toLocaleUpperCase() }}
           </h1>
         </div>
-        <p class="mb-0 text-center">
+        <p class="mb-0 text-center text-body-2 text-medium-emphasis">
           {{ $t('Standard System') }}
         </p>
       </VCardText>
 
-      <VCardText>
+      <VCardText class="px-8 pb-8 pt-0">
         <VForm ref="refLoginForm" @submit.prevent="onClickLogin">
           <VRow>
             <VCol cols="12">
@@ -59,6 +65,7 @@ async function onClickLogin() {
                 autofocus
                 :label="$t('Email')"
                 type="email"
+                variant="outlined"
                 :rules="[requiredValidator, emailValidator]"
                 placeholder="your@email.com"
               />
@@ -68,6 +75,7 @@ async function onClickLogin() {
               <VTextField
                 v-model="password"
                 :label="$t('Password')"
+                variant="outlined"
                 placeholder="············"
                 :rules="[requiredValidator]"
                 :type="isPasswordVisible ? 'text' : 'password'"
@@ -77,7 +85,7 @@ async function onClickLogin() {
 
               <div class="d-flex align-center flex-wrap justify-space-between my-5 gap-4" />
 
-              <VBtn block type="submit" :loading="isProcessing">
+              <VBtn block type="submit" :loading="isProcessing" size="large" rounded="lg" class="font-weight-medium">
                 {{ $t('Login') }}
               </VBtn>
             </VCol>
@@ -109,8 +117,6 @@ async function onClickLogin() {
       :src="authThemeMask"
       height="172"
     >
-
-    <!-- Snackbar Message -->
   </div>
 </template>
 

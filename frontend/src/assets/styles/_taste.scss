@@ -1,0 +1,86 @@
+/* ============================================
+   taste-skill inspired enhancements
+   Anti-slop: better cards, transitions, tables
+   ============================================ */
+
+/* ---------- Page transitions ---------- */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+
+/* ---------- Card hover aesthetics ---------- */
+.v-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.v-card.card-hoverable:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md) !important;
+}
+
+/* ---------- Data table refinements ---------- */
+.v-data-table {
+  border-radius: var(--radius-md);
+}
+
+.v-data-table .v-data-table-header th {
+  font-weight: 600;
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  text-transform: none;
+}
+
+.v-data-table .v-data-table__tr:hover {
+  background-color: rgb(var(--v-theme-primary)) !important;
+  background-opacity: 0.03 !important;
+}
+
+/* ---------- Stat cards on dashboard ---------- */
+.stat-card .stat-value {
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Dialog polish ---------- */
+.v-dialog .v-card {
+  border-radius: var(--radius-lg) !important;
+}
+
+/* ---------- Button consistency ---------- */
+.v-btn {
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-weight: 500;
+}
+
+/* ---------- Chip text ---------- */
+.v-chip {
+  font-weight: 500;
+}
+
+/* ---------- Better table empty state ---------- */
+.v-data-table .v-data-table-footer {
+  border-top: none;
+}
+
+/* ---------- Login page premium backdrop ---------- */
+.auth-wrapper {
+  position: relative;
+  overflow: hidden;
+}

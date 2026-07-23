@@ -26,20 +26,21 @@ function colorDot(color: string | null) {
 </script>
 
 <template>
-  <VCard>
-    <VCardTitle class="d-flex align-center pa-4">
-      <span class="text-h5">{{ $t('Categories') }}</span>
+  <VCard elevation="0" border rounded="lg">
+    <div class="d-flex align-center pa-5">
+      <h5 class="text-h5 font-weight-bold mb-0">{{ $t('Categories') }}</h5>
       <VSpacer />
-      <VBtn color="primary" prepend-icon="ri-add-line" @click="categoryStore.createCategory">{{ $t('Add Category') }}</VBtn>
-    </VCardTitle>
+      <VBtn color="primary" prepend-icon="ri-add-line" rounded="lg" class="font-weight-medium" @click="categoryStore.createCategory">{{ $t('Add Category') }}</VBtn>
+    </div>
+    <VDivider />
     <VDataTable :headers="headers" :items="categoryStore.categories" :loading="categoryStore.isLoading">
       <template #item.isDefault="{ item }">
-        <VChip v-if="item.isDefault" size="small" color="info">{{ $t('Default') }}</VChip>
-        <span v-else>{{ $t('Custom') }}</span>
+        <VChip v-if="item.isDefault" size="small" color="info" variant="tonal">{{ $t('Default') }}</VChip>
+        <span v-else class="text-medium-emphasis">{{ $t('Custom') }}</span>
       </template>
       <template #item.color="{ item }">
-        <span :style="colorDot(item.color)" v-if="item.color"></span>
-        <span v-else>—</span>
+        <span :style="colorDot(item.color)" v-if="item.color" class="border" style="border-width:2px!important;"></span>
+        <span v-else class="text-medium-emphasis">—</span>
       </template>
     </VDataTable>
   </VCard>

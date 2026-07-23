@@ -75,17 +75,19 @@ onMounted(() => userStore.fetchUsers())
 
 <template>
   <div>
-    <VCard>
-      <VCardTitle class="d-flex align-center justify-space-between pa-4">
-        <span class="text-h6">{{ $t('Users Management') }}</span>
+    <VCard elevation="0" border rounded="lg">
+      <div class="d-flex align-center justify-space-between pa-5">
+        <h5 class="text-h5 font-weight-bold mb-0">{{ $t('Users Management') }}</h5>
         <VBtn
           color="primary"
           prepend-icon="ri-user-add-line"
+          rounded="lg"
+          class="font-weight-medium"
           @click="openCreate"
         >
           {{ $t('Add User') }}
         </VBtn>
-      </VCardTitle>
+      </div>
 
       <VDivider />
 
@@ -119,7 +121,7 @@ onMounted(() => userStore.fetchUsers())
         </template>
 
         <template #no-data>
-          <div class="text-center py-8 text-disabled">
+          <div class="text-center py-8 text-disabled font-weight-medium">
             {{ $t('No users yet') }}
           </div>
         </template>
@@ -128,13 +130,14 @@ onMounted(() => userStore.fetchUsers())
 
     <!-- Create / Edit Dialog -->
     <VDialog v-model="dialog" max-width="480" persistent>
-      <VCard :title="editingUser ? $t('Edit User') : $t('Add User')">
+      <VCard :title="editingUser ? $t('Edit User') : $t('Add User')" rounded="lg" elevation="0" border>
         <VCardText>
           <VForm @submit.prevent="submit">
             <VTextField
               v-model="form.name"
               :label="$t('Name')"
               prepend-inner-icon="ri-user-line"
+              variant="outlined"
               class="mb-4"
               required
             />
@@ -143,16 +146,19 @@ onMounted(() => userStore.fetchUsers())
               :label="$t('Email')"
               type="email"
               prepend-inner-icon="ri-mail-line"
+              variant="outlined"
               required
             />
           </VForm>
         </VCardText>
-        <VCardActions class="justify-end pa-4">
-          <VBtn variant="text" @click="dialog = false">{{ $t('Cancel') }}</VBtn>
+        <VCardActions class="justify-end pa-4 pt-0">
+          <VBtn variant="text" @click="dialog = false" class="font-weight-medium">{{ $t('Cancel') }}</VBtn>
           <VBtn
             color="primary"
             :loading="isSubmitting"
             @click="submit"
+            rounded="lg"
+            class="font-weight-medium"
           >
             {{ editingUser ? $t('Save') : $t('Create') }}
           </VBtn>
@@ -162,16 +168,18 @@ onMounted(() => userStore.fetchUsers())
 
     <!-- Delete Dialog -->
     <VDialog v-model="deleteDialog" max-width="400">
-      <VCard :title="$t('Delete User')">
-        <VCardText>
+      <VCard :title="$t('Delete User')" rounded="lg" elevation="0" border>
+        <VCardText class="text-body-1">
           {{ $t('Are you sure you want to delete {name}? This action cannot be undone.', { name: deletingUser?.name }) }}
         </VCardText>
-        <VCardActions class="justify-end pa-4">
-          <VBtn variant="text" @click="deleteDialog = false">{{ $t('Cancel') }}</VBtn>
+        <VCardActions class="justify-end pa-4 pt-0">
+          <VBtn variant="text" @click="deleteDialog = false" class="font-weight-medium">{{ $t('Cancel') }}</VBtn>
           <VBtn
             color="error"
             :loading="isSubmitting"
             @click="confirmDelete"
+            rounded="lg"
+            class="font-weight-medium"
           >
             {{ $t('Delete') }}
           </VBtn>
