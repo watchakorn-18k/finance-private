@@ -3,13 +3,14 @@ import { handle } from 'hono/aws-lambda'
 import { cors } from 'hono/cors'
 import { mountRouters } from './routers'
 import { createContainer } from './di/container'
+import type { Container } from './di/container'
 import { MemoryUserRepository } from './infrastructure/memory/memory-user-repository'
 import { MemoryCategoryRepository } from './infrastructure/memory/memory-category-repository'
 import { MemoryTransactionRepository } from './infrastructure/memory/memory-transaction-repository'
 import { MemoryCacheRepository } from './infrastructure/memory/memory-cache-repository'
-import type { CacheRepository } from './domain/repositories/cache-repository'
+import type { Env } from './types'
 
-const app = new Hono()
+const app = new Hono<{ Bindings: Env; Variables: { container: Container } }>()
 
 app.use('*', cors())
 

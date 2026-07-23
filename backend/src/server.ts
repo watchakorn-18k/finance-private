@@ -1,24 +1,17 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { describeRoute } from 'hono-openapi'
-import { resolver } from 'hono-openapi'
+import { describeRoute, resolver } from 'hono-openapi'
 import { z } from 'zod'
 import { apiReference } from '@scalar/hono-api-reference'
 import { mountRouters } from './routers'
 import { createContainer } from './di/container'
+import type { Container, Env } from './types'
 import { D1UserRepository } from './infrastructure/d1/d1-user-repository'
 import { D1CategoryRepository } from './infrastructure/d1/d1-category-repository'
 import { D1TransactionRepository } from './infrastructure/d1/d1-transaction-repository'
 import { KVCacheRepository } from './infrastructure/kv/kv-cache-repository'
 
-export interface Env {
-  DB: D1Database
-  KV: KVNamespace
-  ENVIRONMENT?: string
-  JWT_SECRET?: string
-}
-
-const app = new Hono<{ Bindings: Env; Variables: { container: import('./di/container').Container } }>()
+const app = new Hono<{ Bindings: Env; Variables: { container: Container } }>()
 
 app.use('*', cors())
 

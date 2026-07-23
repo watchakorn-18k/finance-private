@@ -1,5 +1,5 @@
 import type { TransactionRepository } from '../../domain/repositories/transaction-repository'
-import type { Transaction, CreateTransactionInput, UpdateTransactionInput, TransactionFilter } from '../../entities/transaction'
+import type { Transaction, CreateTransactionInput, UpdateTransactionInput, TransactionFilter } from '../../domain/entities/transaction'
 import type { D1Database } from '../../types'
 
 interface TransactionRow {

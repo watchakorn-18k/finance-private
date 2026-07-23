@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
+import type { Env, Container } from '../types'
 import { resolver, validator } from 'hono-openapi'
-import type { Container } from '../di/container'
 import { createCategorySchema, updateCategorySchema, categoryResponseSchema, categoryListResponseSchema } from '../schemas/category-schemas'
 import { errorResponseSchema } from '../schemas/shared'
 
