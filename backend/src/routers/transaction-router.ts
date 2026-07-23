@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { describeRoute } from 'hono-openapi'
-import { resolver, validator } from 'hono-openapi/zod'
+import { resolver, validator } from 'hono-openapi'
 import type { Container } from '../di/container'
 import { createTransactionSchema, updateTransactionSchema, transactionQuerySchema, transactionResponseSchema, transactionListResponseSchema } from '../schemas/transaction-schemas'
 import { errorResponseSchema } from '../schemas/shared'

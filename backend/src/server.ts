@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 import { describeRoute } from 'hono-openapi'
-import { resolver } from 'hono-openapi/zod'
+import { resolver } from 'hono-openapi'
 import { z } from 'zod'
 import { apiReference } from '@scalar/hono-api-reference'
 import { mountRouters } from './routers'
@@ -22,12 +22,6 @@ const app = new Hono<{ Bindings: Env; Variables: { container: import('./di/conta
 
 app.use('*', cors())
 
-app.openAPIRegistry.registerComponent('securitySchemes', 'X-User-Id', {
-  type: 'apiKey',
-  in: 'header',
-  name: 'X-User-Id',
-})
-
 app.get(
   '/health',
   describeRoute({
@@ -42,7 +36,7 @@ app.get(
   '/docs',
   apiReference({
     spec: { url: '/openapi.json' },
-    pageTitle: 'เงินเงินทองทอง API',
+    pageTitle: 'ngern-finance API',
   }),
 )
 

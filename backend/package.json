@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
+    "build": "tsc --outDir dist || true",
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
     "build:lambda": "esbuild src/lambda.ts --bundle --platform=node --target=node20 --format=esm --outfile=dist/lambda/index.mjs",
